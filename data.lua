@@ -5,7 +5,7 @@
 --]]
 
 -- require("prototypes.make_loader")
-local lr = require("__LoaderRedux__.make_loader")
+local lr = require("__loader-redux-updated__.make_loader")
 require("prototypes.recipe")
 
 local tints = {

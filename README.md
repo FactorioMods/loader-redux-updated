@@ -1,13 +1,16 @@
-# Loader-Redux
+# Loader Redux: Updated
 Adds Loaders.
 Rewritten add-loader with new loader snapping logic.
 Graphics from Arch666Angel and Kirazy.
 
+This Factorio 2.1.24 port retains the three 1×2 loader tiers, belt snapping, native rail interaction and original item, recipe and technology names. It adopts original Loader Redux state.
+
+Original project: [LoaderRedux](https://mods.factorio.com/mod/LoaderRedux) — Optera; graphics credits from Arch666Angel and Kirazy are retained above. [Original source](https://github.com/0ptera/Loader-Redux). [Updated Mod Portal page](https://mods.factorio.com/mod/loader-redux-updated) · [Fork source](https://github.com/FactorioMods/loader-redux-updated).
 
 # API Data Stage
 required to use make_loader function with 1.8.0
 ```lua
-local loader_redux = require("__LoaderRedux__.make_loader")
+local loader_redux = require("__loader-redux-updated__.make_loader")
 ```
 
 create loader item

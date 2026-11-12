@@ -1,3 +1,4 @@
+local legacy_import=require("legacy_import")
 --[[ Copyright (c) 2017 Optera
  * Part of Loader Redux
  *
@@ -21,26 +22,26 @@ remote.add_interface("loader-redux",  {
   -- add loader name if it doesn't already exist
   add_loader = function(name)
     if name then
-      global.supported_loaders = global.supported_loaders or {} -- allows on_init of API subscribers be called before on_configuration_changed resets everything
-      global.supported_loaders[name] = true
-      global.supported_loader_names = {}
-      for k, v in pairs(global.supported_loaders) do
-        table.insert(global.supported_loader_names, k)
+      storage.supported_loaders = storage.supported_loaders or {} -- allows on_init of API subscribers be called before on_configuration_changed resets everything
+      storage.supported_loaders[name] = true
+      storage.supported_loader_names = {}
+      for k, v in pairs(storage.supported_loaders) do
+        table.insert(storage.supported_loader_names, k)
       end
-      log("global.supported_loaders: "..serpent.block(global.supported_loaders) )
+      log("storage.supported_loaders: "..serpent.block(storage.supported_loaders) )
     end
   end,
 
   -- remove loader name
   remove_loader = function(name)
     if name then
-      global.supported_loaders = global.supported_loaders or {} -- allows on_init of API subscribers be called before on_configuration_changed resets everything
-      global.supported_loaders[name] = nil
-      global.supported_loader_names = {}
-      for k, v in pairs(global.supported_loaders) do
-        table.insert(global.supported_loader_names, k)
+      storage.supported_loaders = storage.supported_loaders or {} -- allows on_init of API subscribers be called before on_configuration_changed resets everything
+      storage.supported_loaders[name] = nil
+      storage.supported_loader_names = {}
+      for k, v in pairs(storage.supported_loaders) do
+        table.insert(storage.supported_loader_names, k)
       end
-      log("global.supported_loaders: "..serpent.block(global.supported_loaders) )
+      log("storage.supported_loaders: "..serpent.block(storage.supported_loaders) )
     end
   end
 })
@@ -54,8 +55,8 @@ end)
 
 --Snap loaders on built or correct existing loaders when building next to them.
 script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity}, function(event)
-  local entity = event.created_entity
-  if entity.type == "loader" and global.supported_loaders[entity.name] then
+  local entity = event.entity
+  if entity.type == "loader" and storage.supported_loaders[entity.name] then
     if use_snapping then
       snapping.snap_loader(entity, event)
     end
@@ -76,7 +77,7 @@ end)
 ---- Bootstrap ----
 
 function init_supported_loaders()
-  global.supported_loaders = {} -- clean old prototype names, API subscribers should be called afterwards
+  storage.supported_loaders = {} -- clean old prototype names, API subscribers should be called afterwards
   remote.call("loader-redux", "add_loader", "loader")
   remote.call("loader-redux", "add_loader", "fast-loader")
   remote.call("loader-redux", "add_loader", "express-loader")
@@ -84,13 +85,15 @@ end
 
 -- On first install scan the map and find any loaders that might need work!
 script.on_init(function()
+  if legacy_import.adopt("LoaderRedux") then return end
   init_supported_loaders()
 end)
 
 -- rescan all loader-wagon connections in case changing mods removed some wagons
 script.on_configuration_changed(function(data)
+  legacy_import.adopt("LoaderRedux")
   init_supported_loaders()
   -- wipe unused globals
-  global.wagons = nil
-  global.loader_wagon_map = nil
+  storage.wagons = nil
+  storage.loader_wagon_map = nil
 end)

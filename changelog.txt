@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 2.0.0
+Date: 2026-11-12
+  Changes:
+    - Port the original three 1x2 loader tiers, snapping and rail interaction to current Factorio APIs and direction constants.
+    - Retain original item, recipe and technology names, and adopt original Loader Redux save state.
+  Testing:
+    - Native item-flow checks passed at all tiers and cardinal rotations, with 12 player builds and 48 robot-built blueprint layouts also verified.
+---------------------------------------------------------------------------------------------------
 Version: 1.9.1
 Date: 2023-06-13
   Bugfixes:

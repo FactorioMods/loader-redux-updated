@@ -4,7 +4,7 @@
  * See LICENSE.md in the project directory for license information.
 --]]
 
-local flib = require('__flib__.data-util')
+local flib = {copy_prototype=function(proto,name) local p=table.deepcopy(proto);p.name=name;return p end}
 local lr_make_loader = {}
 
 --- create loader item
@@ -19,13 +19,13 @@ function lr_make_loader.make_loader_item(name, subgroup, order, tint)
     icons = {
       -- Base
       {
-        icon = "__LoaderRedux__/graphics/icon/icon-loader-base.png",
+        icon = "__loader-redux-updated__/graphics/icon/icon-loader-base.png",
         icon_size = 64,
         icon_mipmaps = 4,
       },
       -- Mask
       {
-        icon = "__LoaderRedux__/graphics/icon/icon-loader-mask.png",
+        icon = "__loader-redux-updated__/graphics/icon/icon-loader-mask.png",
         icon_size = 64,
         icon_mipmaps = 4,
         tint = tint,
@@ -45,18 +45,18 @@ end
 -- @tparam String|nil next_upgrade
 function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
   local loader = data.raw["loader"][name] or flib.copy_prototype(data.raw["loader"]["loader"], name)
-  loader.flags = {"placeable-neutral", "placeable-player", "player-creation", "fast-replaceable-no-build-while-moving"}
-  loader.collision_mask = {"floor-layer", "object-layer", "transport-belt-layer", "water-tile"} -- match belt collision layers
+  loader.flags = {"placeable-neutral", "placeable-player", "player-creation"}
+  loader.collision_mask = table.deepcopy(belt.collision_mask) -- match belt collision layers
   loader.icons = {
     -- Base
     {
-      icon = "__LoaderRedux__/graphics/icon/icon-loader-base.png",
+      icon = "__loader-redux-updated__/graphics/icon/icon-loader-base.png",
       icon_size = 64,
       icon_mipmaps = 4,
     },
     -- Mask
     {
-      icon = "__LoaderRedux__/graphics/icon/icon-loader-mask.png",
+      icon = "__loader-redux-updated__/graphics/icon/icon-loader-mask.png",
       icon_size = 64,
       icon_mipmaps = 4,
       tint = tint,
@@ -65,13 +65,13 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
 
   loader.structure.front_patch = {
     sheet = {
-      filename= "__LoaderRedux__/graphics/entity/loader-front-patch.png",
+      filename= "__loader-redux-updated__/graphics/entity/loader-front-patch.png",
       priority = "extra-high",
       width = 94,
       height = 79,
       shift = util.by_pixel(10, 2),
       hr_version = {
-        filename= "__LoaderRedux__/graphics/entity/hr-loader-front-patch.png",
+        filename= "__loader-redux-updated__/graphics/entity/hr-loader-front-patch.png",
         priority = "extra-high",
         width = 186,
         height = 155,
@@ -85,13 +85,13 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
     sheets = {
       -- Base
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-base.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-base.png",
         priority = "extra-high",
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-base.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-base.png",
           priority = "extra-high",
           width = 186,
           height = 155,
@@ -101,14 +101,14 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
       },
       -- Mask
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-mask.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-mask.png",
         priority = "extra-high",
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         tint = tint,
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-mask.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-mask.png",
           priority = "extra-high",
           width = 186,
           height = 155,
@@ -119,14 +119,14 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
       },
       -- Shadow
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-shadow.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-shadow.png",
         priority = "extra-high",
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         draw_as_shadow = true,
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-shadow.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-shadow.png",
           priority = "extra-high",
           width = 186,
           height = 155,
@@ -137,14 +137,14 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
       },
       -- Lights
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-lights.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-lights.png",
         priority = "extra-high",
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         draw_as_light = true,
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-lights.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-lights.png",
           priority = "extra-high",
           width = 186,
           height = 155,
@@ -159,14 +159,14 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
     sheets = {
       -- Base
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-base.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-base.png",
         priority = "extra-high",
         y = 79,
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-base.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-base.png",
           priority = "extra-high",
           y = 155,
           width = 186,
@@ -177,14 +177,14 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
       },
       -- Mask
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-mask.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-mask.png",
         priority = "extra-high",
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         tint = tint,
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-mask.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-mask.png",
           priority = "extra-high",
           width = 186,
           height = 155,
@@ -195,14 +195,14 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
       },
       -- Shadow
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-shadow.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-shadow.png",
         priority = "extra-high",
         width = 94,
         height = 79,
         shift = util.by_pixel(10, 2),
         draw_as_shadow = true,
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-shadow.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-shadow.png",
           priority = "extra-high",
           width = 186,
           height = 155,
@@ -213,7 +213,7 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
       },
       -- Lights
       {
-        filename= "__LoaderRedux__/graphics/entity/loader-lights.png",
+        filename= "__loader-redux-updated__/graphics/entity/loader-lights.png",
         priority = "extra-high",
         y = 79,
         width = 94,
@@ -221,7 +221,7 @@ function lr_make_loader.make_loader_entity(name, belt, tint, next_upgrade)
         shift = util.by_pixel(10, 2),
         draw_as_light = true,
         hr_version = {
-          filename= "__LoaderRedux__/graphics/entity/hr-loader-lights.png",
+          filename= "__loader-redux-updated__/graphics/entity/hr-loader-lights.png",
           priority = "extra-high",
           y = 155,
           width = 186,

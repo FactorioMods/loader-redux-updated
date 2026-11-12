@@ -12,12 +12,12 @@ data:extend({
     hidden = false,
     energy_required = 5,
     ingredients = {
-      {"iron-plate", 10},
-      {"electronic-circuit", 10},
-      {"inserter", 5},
-      {"transport-belt", 5},
+      {type="item",name="iron-plate",amount=10},
+      {type="item",name="electronic-circuit",amount=10},
+      {type="item",name="inserter",amount=5},
+      {type="item",name="transport-belt",amount=5},
     },
-    result = "loader"
+    results = {{type="item",name="loader",amount=1}}
   },
   {
     type = "recipe",
@@ -26,26 +26,27 @@ data:extend({
     hidden = false,
     energy_required = 5,
     ingredients = {
-      {"iron-gear-wheel", 20},
-      {"electronic-circuit", 20},
-      {"advanced-circuit", 1},
-      {"loader", 1},
+      {type="item",name="iron-gear-wheel",amount=20},
+      {type="item",name="electronic-circuit",amount=20},
+      {type="item",name="advanced-circuit",amount=1},
+      {type="item",name="loader",amount=1},
     },
-    result = "fast-loader"
+    results = {{type="item",name="fast-loader",amount=1}}
   },
   {
     type = "recipe",
     name = "express-loader",
-    category = "crafting-with-fluid",
+    categories = {"crafting-with-fluid"},
     enabled = false,
     hidden = false,
     energy_required = 5,
     ingredients = {
-      {"iron-gear-wheel", 20},
-      {"advanced-circuit", 20},
-      {"fast-loader", 1},
+      {type="item",name="iron-gear-wheel",amount=20},
+      {type="item",name="advanced-circuit",amount=20},
+      {type="item",name="fast-loader",amount=1},
       {type="fluid", name="lubricant", amount=80},
     },
-    result = "express-loader"
+    results = {{type="item",name="express-loader",amount=1}}
   },
 })
+

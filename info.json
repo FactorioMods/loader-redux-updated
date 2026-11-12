@@ -1,11 +1,17 @@
 {
-  "name": "LoaderRedux",
-  "version": "1.9.1",
-  "title": "Loader Redux",
-  "author": "Optera",
+  "name": "loader-redux-updated",
+  "version": "2.0.0",
+  "title": "Loader Redux: Updated",
+  "author": "Optera; johnmart19 / FactorioMods (legacy-state port)",
   "contact": "https://forums.factorio.com/memberlist.php?mode=viewprofile&u=21729",
   "homepage": "https://forums.factorio.com/viewtopic.php?f=97&t=48412",
-  "description": "Adds Loaders capable of snapping to belts. Graphics from Arch666Angel and Kirazy.",
-  "factorio_version": "1.1",
-  "dependencies": ["base >= 1.1.75", "flib >= 0.6.0"]
+  "description": "Three 1x2 loader tiers for Factorio 2.1 with belt snapping, native rail interaction and legacy state import. Retains the original items, recipes and technology unlocks.",
+  "factorio_version": "2.1",
+  "dependencies": [
+    "base >= 2.1.24",
+    "! LoaderRedux"
+  ],
+  "migrates_from": [
+    "LoaderRedux"
+  ]
 }
